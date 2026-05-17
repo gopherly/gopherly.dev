@@ -21,17 +21,20 @@ function vanityHTML(pkg: string, repo: string): string {
 export default {
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
+    const pkg = url.pathname.split("/").filter(Boolean)[0];
+    const repo = pkg ? PACKAGES[pkg] : undefined;
 
     if (url.searchParams.get("go-get") === "1") {
-      const pkg = url.pathname.split("/").filter(Boolean)[0];
-      const repo = pkg ? PACKAGES[pkg] : undefined;
       if (!repo) {
         return new Response("Not Found", { status: 404 });
       }
-
       return new Response(vanityHTML(pkg, repo), {
         headers: { "content-type": "text/html; charset=utf-8" },
       });
+    }
+
+    if (repo) {
+      return Response.redirect(repo, 302);
     }
 
     const pagesUrl = new URL(url.pathname + url.search, PAGES_ORIGIN);
