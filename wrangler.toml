@@ -1,0 +1,7 @@
+name = "gopherly-dev"
+main = "src/index.ts"
+compatibility_date = "2026-05-17"
+
+routes = [
+  { pattern = "gopherly.dev", custom_domain = true }
+]
