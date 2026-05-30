@@ -4,6 +4,7 @@ const PAGES_ORIGIN = "https://gopherly-www.pages.dev";
 
 const PACKAGES: Record<string, string> = {
   synthra: `${ORG}/synthra`,
+  currus: `${ORG}/currus`,
 };
 
 function vanityHTML(pkg: string, repo: string): string {
